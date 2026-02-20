@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Know Your Pharmacy - A citizen-centric mobile app for India that helps users verify pharmacy and pharmacist details, check pharmacist presence at dispensing counters, and generate complaints to appropriate authorities when pharmacists are absent. Built with Flutter, Node.js backend, and PostgreSQL.",
+  "architectural_notes": [
+    "Flutter mobile app with Node.js/Express backend and PostgreSQL database",
+    "Offline-first design: core flows work without network, reports queued locally",
+    "Optional authentication with guest mode for anonymous complaints",
+    "State management using Provider or Riverpod for separation of UI and business logic",
+    "Camera and GPS permissions requested explicitly with user consent",
+    "Encrypted local storage for sensitive report data",
+    "Modular architecture: separate UI, state, data layers for maintainability",
+    "Translation-ready architecture with string externalization for Hindi/English support",
+    "Email client integration for pre-filled complaint submission to authorities",
+    "Configuration-driven authority lists (state-specific) stored in backend"
+  ],
+  "known_issues": [
+    "\"Get Started\" button on onboarding screen is not triggering navigation to home screen"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-onboarding-flow-with-three-screens-1-app-purpose-explanation-public-interest-patient-safety-2-legal-disclaimer-stating-the-app-does-not-certify-de-license-pharmacies-only-assists-in-collecting-information-and-preparing-complaints-and-3-terms-and-privacy-policy-acceptance-show-on-first-launch-only",
+      "title": "Create onboarding flow with three screens: (1) app purpose explanation (public interest, patient safety), (2) legal disclaimer stating the app does not certify/de-license pharmacies, only assists in collecting information and preparing complaints, and (3) terms and privacy policy acceptance. Show on first launch only.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-home-screen-with-four-navigation-cards-check-pharmacy-pharmacist-report-an-issue-how-to-complain-know-your-rights-and-my-reports-visible-when-user-is-logged-in-or-has-local-reports",
+      "title": "Build home screen with four navigation cards: 'Check pharmacy & pharmacist', 'Report an issue', 'How to complain / Know your rights', and 'My reports' (visible when user is logged in or has local reports).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-check-pharmacy-screen-with-fields-pharmacy-name-text-address-text-with-optional-gps-capture-button-state-dropdown-with-indian-states-optional-drug-license-number-text-include-next-check-pharmacist-button-that-advances-to-pharmacist-verification",
+      "title": "Implement 'Check pharmacy' screen with fields: pharmacy name (text), address (text with optional GPS capture button), state (dropdown with Indian states), optional drug license number (text). Include 'Next: Check pharmacist' button that advances to pharmacist verification.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-check-pharmacist-screen-with-fields-pharmacist-name-text-registration-number-text-state-of-registration-dropdown-include-photo-capture-button-for-pharmacist-name-display-board-and-placeholder-for-future-qr-scanning-validate-registration-number-format-non-empty-alphanumeric-display-message-verification-is-indicative-only-official-verification-is-done-by-state-pharmacy-council-pci-relevant-authority",
+      "title": "Build 'Check pharmacist' screen with fields: pharmacist name (text), registration number (text), state of registration (dropdown). Include photo capture button for pharmacist name display board and placeholder for future QR scanning. Validate registration number format (non-empty, alphanumeric). Display message: 'Verification is indicative only. Official verification is done by State Pharmacy Council / PCI / relevant authority.'",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-pharmacist-presence-check-questionnaire-with-questions-1-is-the-registered-pharmacist-physically-present-at-the-counter-right-now-yes-no-not-sure-radio-buttons-2-who-is-actually-dispensing-medicines-dropdown-registered-pharmacist-other-staff-i-am-not-sure-3-how-long-did-you-observe-the-situation-dropdown-0-5-min-5-15-min-15-min-include-buttons-to-capture-multiple-photos-entrance-counter-pharmacist-info-capture-gps-location-and-auto-generate-timestamp",
+      "title": "Create pharmacist presence check questionnaire with questions: (1) 'Is the registered pharmacist physically present at the counter right now?' (Yes/No/Not sure radio buttons), (2) 'Who is actually dispensing medicines?' (dropdown: Registered pharmacist / Other staff / I am not sure), (3) 'How long did you observe the situation?' (dropdown: 0-5 min / 5-15 min / >15 min). Include buttons to capture multiple photos (entrance, counter, pharmacist info), capture GPS location, and auto-generate timestamp.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-report-details-screen-that-pre-fills-pharmacy-details-pharmacist-details-date-time-gps-location-and-photos-from-previous-steps-add-issue-type-selection-multi-select-checkboxes-pharmacist-absent-pharmacist-details-not-displayed-suspected-fake-pharmacist-others-with-text-field-include-optional-user-contact-fields-name-phone-number-email-generate-structured-complaint-summary-object-for-storage-and-export",
+      "title": "Build 'Report details' screen that pre-fills pharmacy details, pharmacist details, date/time, GPS location, and photos from previous steps. Add issue type selection (multi-select checkboxes: Pharmacist absent, Pharmacist details not displayed, Suspected fake pharmacist, Others with text field). Include optional user contact fields: name, phone number, email. Generate structured complaint summary object for storage and export.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-submit-complaint-screen-that-displays-state-appropriate-authorities-based-on-pharmacy-state-and-issue-type-show-recommended-authorities-state-drug-controller-state-pharmacy-council-cdsco-consumer-forum-for-each-authority-display-email-phone-and-website-provide-send-email-complaint-button-that-opens-device-email-client-with-pre-filled-recipient-subject-line-format-complaint-regarding-pharmacist-absence-pharmacy-operations-state-city-and-structured-complaint-summary-in-body-include-open-complaint-website-button-that-launches-browser",
+      "title": "Implement 'Submit complaint' screen that displays state-appropriate authorities based on pharmacy state and issue type. Show recommended authorities: State Drug Controller, State Pharmacy Council, CDSCO, Consumer forum. For each authority, display email, phone, and website. Provide 'Send email complaint' button that opens device email client with pre-filled recipient, subject line format 'Complaint regarding pharmacist absence / pharmacy operations – [State], [City]', and structured complaint summary in body. Include 'Open complaint website' button that launches browser.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-education-module-with-static-content-pages-explaining-1-role-and-responsibilities-of-registered-pharmacist-in-india-2-importance-of-pharmacist-presence-for-safe-dispensing-3-basic-pharmacy-regulations-in-simple-language-include-faq-section-with-questions-what-should-be-displayed-in-a-legal-pharmacy-can-a-pharmacy-run-without-pharmacist-what-evidence-should-i-keep-when-i-complain-content-should-be-stored-in-backend-as-markdown-or-json-for-easy-updates",
+      "title": "Build education module with static content pages explaining: (1) role and responsibilities of registered pharmacist in India, (2) importance of pharmacist presence for safe dispensing, (3) basic pharmacy regulations in simple language. Include FAQ section with questions: 'What should be displayed in a legal pharmacy?', 'Can a pharmacy run without pharmacist?', 'What evidence should I keep when I complain?'. Content should be stored in backend as markdown or JSON for easy updates.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-my-reports-screen-showing-list-of-user-s-reports-for-logged-in-users-or-local-reports-guest-mode-display-summary-for-each-pharmacy-name-date-issue-type-status-draft-email-sent-support-export-as-text-or-formatted-complaint-edit-navigate-back-to-report-details-and-delete-actions-for-guest-mode-store-reports-in-local-device-storage-until-app-data-is-cleared",
+      "title": "Implement 'My Reports' screen showing list of user's reports (for logged-in users) or local reports (guest mode). Display summary for each: pharmacy name, date, issue type, status (Draft, Email sent). Support export (as text or formatted complaint), edit (navigate back to report details), and delete actions. For guest mode, store reports in local device storage until app data is cleared.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-optional-user-authentication-supporting-email-phone-registration-and-guest-mode-guest-users-can-submit-anonymous-complaints-but-must-provide-contact-details-in-report-if-authority-requires-it-logged-in-users-have-their-contact-details-pre-filled-authentication-should-be-simple-and-not-required-for-core-app-functionality",
+      "title": "Add optional user authentication supporting email/phone registration and guest mode. Guest users can submit anonymous complaints but must provide contact details in report if authority requires it. Logged-in users have their contact details pre-filled. Authentication should be simple and not required for core app functionality.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-offline-first-architecture-where-all-core-flows-pharmacy-check-pharmacist-verification-presence-check-report-creation-work-without-network-queue-report-submissions-locally-when-offline-and-sync-to-backend-when-network-becomes-available-only-authority-routing-and-opening-external-links-require-network-show-clear-network-status-indicators",
+      "title": "Implement offline-first architecture where all core flows (pharmacy check, pharmacist verification, presence check, report creation) work without network. Queue report submissions locally when offline and sync to backend when network becomes available. Only authority routing and opening external links require network. Show clear network status indicators.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-structure-frontend-for-multilingual-support-with-english-as-implemented-language-and-architecture-ready-for-hindi-translation-use-translation-keys-throughout-ui-instead-of-hardcoded-strings-store-all-user-facing-text-in-a-translations-file-that-can-be-extended-with-hindi-translations-later-use-english-for-all-ui-elements-in-initial-implementation",
+      "title": "Structure frontend for multilingual support with English as implemented language and architecture ready for Hindi translation. Use translation keys throughout UI instead of hardcoded strings. Store all user-facing text in a translations file that can be extended with Hindi translations later. Use English for all UI elements in initial implementation.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-app-is-optimized-for-low-end-android-devices-with-minimal-network-usage-keep-bundle-size-small-implement-image-compression-for-captured-photos-use-efficient-list-rendering-for-reports-and-minimize-backend-api-calls-design-clean-intuitive-ui-with-clear-icons-suitable-for-users-with-varying-technical-literacy",
+      "title": "Ensure app is optimized for low-end Android devices with minimal network usage. Keep bundle size small, implement image compression for captured photos, use efficient list rendering for reports, and minimize backend API calls. Design clean, intuitive UI with clear icons suitable for users with varying technical literacy.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-privacy-and-security-measures-request-explicit-permissions-for-location-and-camera-with-clear-explanations-minimize-data-collection-to-only-necessary-fields-encrypt-sensitive-stored-data-on-device-and-allow-users-to-delete-their-data-include-clear-privacy-policy-during-onboarding",
+      "title": "Implement privacy and security measures: request explicit permissions for location and camera with clear explanations, minimize data collection to only necessary fields, encrypt sensitive stored data on device, and allow users to delete their data. Include clear privacy policy during onboarding.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-the-useonboarding-hook-correctly-persists-completion-state-to-localstorage-and-that-app-tsx-properly-reads-this-state-to-conditionally-show-the-onboarding-flow",
+      "title": "Verify that the useOnboarding hook correctly persists completion state to localStorage and that App.tsx properly reads this state to conditionally show the onboarding flow",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-i-don-t-know-checkbox-option-to-the-check-pharmacist-screen-that-allows-users-to-skip-entering-pharmacist-name-and-registration-number-fields-when-they-don-t-have-this-information-when-checked-disable-the-name-and-registration-number-input-fields-and-allow-navigation-to-the-next-step-without-validation",
+      "title": "Add 'I don't know' checkbox option to the Check Pharmacist screen that allows users to skip entering pharmacist name and registration number fields when they don't have this information. When checked, disable the name and registration number input fields and allow navigation to the next step without validation.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-report-details-screen-and-complaint-email-formatting-to-handle-cases-where-pharmacist-name-and-registration-number-are-not-provided-display-not-available-or-unknown-for-missing-pharmacist-details-in-the-report-summary-and-email-body",
+      "title": "Update the Report Details screen and complaint email formatting to handle cases where pharmacist name and registration number are not provided. Display 'Not available' or 'Unknown' for missing pharmacist details in the report summary and email body.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-i18n-translations-file-to-include-new-translation-keys-for-the-i-don-t-know-checkbox-label-and-help-text-explaining-that-users-can-skip-pharmacist-details-if-they-are-not-displayed-at-the-pharmacy",
+      "title": "Update the i18n translations file to include new translation keys for the 'I don't know' checkbox label and help text explaining that users can skip pharmacist details if they are not displayed at the pharmacy.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-regulatory-bodies-page-accessible-from-the-education-section-or-main-navigation-that-displays-comprehensive-information-about-indian-pharmacy-regulatory-authorities-including-pharmacy-council-of-india-pci-all-state-pharmacy-councils-central-drugs-standard-control-organization-cdsco-state-drug-controllers-and-relevant-consumer-forums",
+      "title": "Create a new 'Regulatory Bodies' page accessible from the Education section or main navigation that displays comprehensive information about Indian pharmacy regulatory authorities including: Pharmacy Council of India (PCI), all state pharmacy councils, Central Drugs Standard Control Organization (CDSCO), state drug controllers, and relevant consumer forums.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-for-each-regulatory-body-listed-on-the-page-display-full-official-name-brief-description-of-their-role-and-jurisdiction-contact-email-address-phone-number-if-available-and-official-website-url-format-contact-information-clearly-with-icons-for-email-phone-and-web-links",
+      "title": "For each regulatory body listed on the page, display: full official name, brief description of their role and jurisdiction, contact email address, phone number (if available), and official website URL. Format contact information clearly with icons for email, phone, and web links.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-query-hook-similar-to-useeducationcontent-to-fetch-regulatory-bodies-information-from-the-backend-with-proper-loading-and-error-states-support-filtering-by-state-if-needed-for-displaying-state-specific-councils",
+      "title": "Create a frontend query hook (similar to useEducationContent) to fetch regulatory bodies information from the backend, with proper loading and error states. Support filtering by state if needed for displaying state-specific councils.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-i18n-translations-file-to-include-all-text-for-the-regulatory-bodies-page-including-page-title-section-headings-body-descriptions-field-labels-email-phone-website-and-any-explanatory-text-about-the-role-of-each-regulatory-authority-type",
+      "title": "Update the i18n translations file to include all text for the Regulatory Bodies page including: page title, section headings, body descriptions, field labels (Email, Phone, Website), and any explanatory text about the role of each regulatory authority type.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-navigation-link-to-the-regulatory-bodies-page-in-the-main-layout-component-navigation-menu-positioned-near-the-education-link-also-add-a-reference-or-link-from-the-education-page-to-the-regulatory-bodies-page-for-discoverability",
+      "title": "Add a navigation link to the Regulatory Bodies page in the main Layout component navigation menu, positioned near the Education link. Also add a reference or link from the Education page to the Regulatory Bodies page for discoverability.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-regulatorybodycard-tsx-component-to-display-full-address-field-when-available-showing-it-below-the-role-description-and-above-contact-information-format-the-address-with-appropriate-spacing-and-icon-location-pin-icon",
+      "title": "Update RegulatoryBodyCard.tsx component to display full address field when available, showing it below the role description and above contact information. Format the address with appropriate spacing and icon (location pin icon).",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-i18n-translations-file-to-add-translation-keys-for-all-new-content-including-section-headers-nationalbodies-statecouncils-consumerforums-section-descriptions-nationalbodiesdescription-statecouncilsdescription-consumerforumsdescription-field-label-for-address-and-updated-role-descriptions-for-all-regulatory-bodies-with-complete-text-as-provided-in-the-data",
+      "title": "Update i18n translations file to add translation keys for all new content including: section headers ('nationalBodies', 'stateCouncils', 'consumerForums'), section descriptions ('nationalBodiesDescription', 'stateCouncilsDescription', 'consumerForumsDescription'), field label for 'address', and updated role descriptions for all regulatory bodies with complete text as provided in the data.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Onboarding flow with legal disclaimer and terms acceptance",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Home screen with navigation to Check Pharmacy, Report Issue, Education, and My Reports",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Pharmacy verification screen with name, address, state, GPS capture, and drug license number",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Pharmacist verification screen with name, registration number, state, photo capture, and QR scanning (future)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Pharmacist presence check questionnaire with photo, GPS, and timestamp capture",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Report creation screen with issue type selection and optional user contact details",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Authority routing screen with state-based recommendations and pre-filled email/complaint submission",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Education module with pharmacist role info, regulations, and FAQ",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "My Reports screen with list, export, edit, and delete functionality",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Optional user authentication with email/phone or guest mode for anonymous complaints",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Backend REST API with endpoints for reports, configuration, and authorities list",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Data models for User, Pharmacy, Pharmacist, Observation, and Report",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Offline-first architecture with local storage and queued submissions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Multilingual support architecture (English priority, Hindi-ready)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Create backend data models for: User (optional, with email/phone), Pharmacy (name, address, state, license number, GPS coordinates), Pharmacist (name, registration number, state, photo URL), Observation (presence answers, photos array, GPS, timestamp), and Report (linking all above entities plus issue types, user details, status). Store reports in backend with timestamps and unique IDs.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Create backend API endpoints: POST /reports (save new report), GET /reports (fetch user's reports or guest's local reports by device ID), GET /reports/:id (fetch single report), PUT /reports/:id (update report status), DELETE /reports/:id (delete report), GET /config/authorities (fetch authorities list by state).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Fix the 'Get Started' button in the Onboarding component to properly mark onboarding as complete and trigger navigation to the home screen when clicked",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Add 'I don't know' or 'Skip' option for pharmacist name and registration number fields when user doesn't have this information",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Create regulatory bodies information page with details about PCI (Pharmacy Council of India), state pharmacy councils, drug regulatory bodies (CDSCO, state drug controllers), and consumer forums, including contact info (email, phone, website) for each",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Add backend data structure to store regulatory body information as content that can be easily updated. Store data as JSON or in the content management system similar to how education content is stored, including fields for: body name, type (national/state/consumer), state (for state-level bodies), description, email, phone, website, and display order.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Update the Regulatory Bodies page with complete contact information including: PCI (with full address, email registrar@pci.nic.in, phone +91-11-61299900), CDSCO (with full address, email dci@nic.in, phone +91-11-23236965), Ministry of Health and Family Welfare (phone +91-11-23061063), Haryana State Pharmacy Council (email registrar.hspc@gmail.com, phone +91-172-2584125, full address), Delhi Pharmacy Council (phone +91-11-22392438), NCDRC (phone +91-11-24608801), Department of Consumer Affairs (helpline 1915), and CCPA. Include full addresses, websites, and role descriptions for each body.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Update the backend regulatoryBodies data structure in main.mo to include complete contact information for all national regulatory bodies: Pharmacy Council of India (PCI) with full address 'NBCC Centre, 3rd Floor, Plot No. 2, Community Centre, Maa Anandamai Marg, Okhla Phase I, New Delhi – 110020', email 'registrar@pci.nic.in', phone '+91-11-61299900', website 'https://www.pci.nic.in', and role description 'Regulates pharmacy education and professional standards under the Pharmacy Act, 1948'; Central Drugs Standard Control Organization (CDSCO) with address 'FDA Bhawan, Kotla Road, New Delhi – 110002', email 'dci@nic.in', phone '+91-11-23236965', website 'https://cdsco.gov.in', and role 'National drug regulatory authority responsible for approval of new drugs, clinical trials, and quality control'; Ministry of Health and Family Welfare with phone '+91-11-23061063', website 'https://mohfw.gov.in', and role 'Policy-making authority for healthcare and pharmaceutical regulation'.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Add state pharmacy council entries to the backend regulatoryBodies data: Haryana State Pharmacy Council with address 'Bays No. 35-36, Sector 17-C, Chandigarh', email 'registrar.hspc@gmail.com', phone '+91-172-2584125', website 'http://hspc.in', state 'Haryana'; Delhi Pharmacy Council with phone '+91-11-22392438', website 'https://delhipharmacycouncil.org', state 'Delhi'. Mark these as type 'state' to distinguish from national bodies.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Add consumer protection forum entries to the backend regulatoryBodies data: National Consumer Disputes Redressal Commission (NCDRC) with phone '+91-11-24608801', website 'https://ncdrc.nic.in', and role 'Apex consumer court in India'; Department of Consumer Affairs with helpline '1915 (Toll Free)', website 'https://consumerhelpline.gov.in'; Central Consumer Protection Authority (CCPA) with website 'https://consumeraffairs.nic.in' and role 'Protects consumer rights and regulates unfair trade practices'. Mark these as type 'consumer' to distinguish from regulatory bodies.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "Update the RegulatoryBodies.tsx frontend component to display regulatory bodies grouped into three sections: 'National Regulatory Bodies' for national-level authorities, 'State Pharmacy Councils' for state-level bodies, and 'Consumer Protection Forums' for consumer authorities. Show descriptive section headers with explanatory text: 'Central authorities overseeing pharmacy education, practice, and drug regulation across India' for national bodies, 'State-level statutory bodies responsible for pharmacist registration and licensing' for state councils, and 'Forums where consumers can file complaints related to pharmacy services, drug pricing, or unethical practices' for consumer forums.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Know Your Pharmacy",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

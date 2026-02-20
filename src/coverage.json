@@ -1,0 +1,85 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-20T18:13:51.150Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 6,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-28",
+        "summary": "Update the backend regulatoryBodies data structure in main.mo to include complete contact information for all national regulatory bodies: Pharmacy Council of India (PCI) with full address 'NBCC Centre, 3rd Floor, Plot No. 2, Community Centre, Maa Anandamai Marg, Okhla Phase I, New Delhi – 110020', email 'registrar@pci.nic.in', phone '+91-11-61299900', website 'https://www.pci.nic.in', and role description 'Regulates pharmacy education and professional standards under the Pharmacy Act, 1948'; Central Drugs Standard Control Organization (CDSCO) with address 'FDA Bhawan, Kotla Road, New Delhi – 110002', email 'dci@nic.in', phone '+91-11-23236965', website 'https://cdsco.gov.in', and role 'National drug regulatory authority responsible for approval of new drugs, clinical trials, and quality control'; Ministry of Health and Family Welfare with phone '+91-11-23061063', website 'https://mohfw.gov.in', and role 'Policy-making authority for healthcare and pharmaceutical regulation'.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-29",
+        "summary": "Add state pharmacy council entries to the backend regulatoryBodies data: Haryana State Pharmacy Council with address 'Bays No. 35-36, Sector 17-C, Chandigarh', email 'registrar.hspc@gmail.com', phone '+91-172-2584125', website 'http://hspc.in', state 'Haryana'; Delhi Pharmacy Council with phone '+91-11-22392438', website 'https://delhipharmacycouncil.org', state 'Delhi'. Mark these as type 'state' to distinguish from national bodies.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-30",
+        "summary": "Add consumer protection forum entries to the backend regulatoryBodies data: National Consumer Disputes Redressal Commission (NCDRC) with phone '+91-11-24608801', website 'https://ncdrc.nic.in', and role 'Apex consumer court in India'; Department of Consumer Affairs with helpline '1915 (Toll Free)', website 'https://consumerhelpline.gov.in'; Central Consumer Protection Authority (CCPA) with website 'https://consumeraffairs.nic.in' and role 'Protects consumer rights and regulates unfair trade practices'. Mark these as type 'consumer' to distinguish from regulatory bodies.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-31",
+        "summary": "Update the RegulatoryBodies.tsx frontend component to display regulatory bodies grouped into three sections: 'National Regulatory Bodies' for national-level authorities, 'State Pharmacy Councils' for state-level bodies, and 'Consumer Protection Forums' for consumer authorities. Show descriptive section headers with explanatory text: 'Central authorities overseeing pharmacy education, practice, and drug regulation across India' for national bodies, 'State-level statutory bodies responsible for pharmacist registration and licensing' for state councils, and 'Forums where consumers can file complaints related to pharmacy services, drug pricing, or unethical practices' for consumer forums.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/pages/RegulatoryBodies.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-32",
+        "summary": "Update RegulatoryBodyCard.tsx component to display full address field when available, showing it below the role description and above contact information. Format the address with appropriate spacing and icon (location pin icon).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/RegulatoryBodyCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/RegulatoryBodyCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-33",
+        "summary": "Update i18n translations file to add translation keys for all new content including: section headers ('nationalBodies', 'stateCouncils', 'consumerForums'), section descriptions ('nationalBodiesDescription', 'stateCouncilsDescription', 'consumerForumsDescription'), field label for 'address', and updated role descriptions for all regulatory bodies with complete text as provided in the data.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/i18n/translations.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/i18n/translations.ts"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/RegulatoryBodyCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/i18n/translations.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

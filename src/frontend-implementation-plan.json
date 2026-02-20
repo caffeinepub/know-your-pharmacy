@@ -1,0 +1,55 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update Regulatory Bodies page with complete contact information and addresses",
+  "requirements": [
+    {
+      "id": "REQ-31",
+      "summary": "Update RegulatoryBodies.tsx to display regulatory bodies grouped into three sections with descriptive headers",
+      "acceptanceCriteria": [
+        "Page displays three distinct sections with appropriate headers",
+        "Each section includes the descriptive explanatory text",
+        "Regulatory bodies are correctly grouped by type (national/state/consumer)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RegulatoryBodies.tsx",
+          "operation": "modify",
+          "description": "Refactor the component to group regulatory bodies by type (national, state, consumer) using the bodyType field from backend. Add three distinct sections with headers: 'National Regulatory Bodies', 'State Pharmacy Councils', and 'Consumer Protection Forums'. Below each header, add descriptive explanatory text: 'Central authorities overseeing pharmacy education, practice, and drug regulation across India' for national bodies, 'State-level statutory bodies responsible for pharmacist registration and licensing' for state councils, and 'Forums where consumers can file complaints related to pharmacy services, drug pricing, or unethical practices' for consumer forums. Filter the regulatory bodies array using getRegulatoryBodiesByType for each section to ensure proper grouping. Maintain existing loading and error states."
+        }
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "summary": "Update RegulatoryBodyCard.tsx to display full address field when available",
+      "acceptanceCriteria": [
+        "Address field is displayed when present in the regulatory body data",
+        "Address appears in logical position within the card layout",
+        "Address uses location pin icon for visual clarity"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/RegulatoryBodyCard.tsx",
+          "operation": "modify",
+          "description": "Add address field display to the card component. Check if the address field exists in the RegulatoryBody data and render it below the role description and above the contact information section. Use a location pin icon (MapPin from lucide-react) for visual clarity. Format the address with appropriate spacing and styling consistent with other card elements. Ensure the address field is conditionally rendered only when present in the data."
+        }
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "summary": "Update i18n translations file to add translation keys for all new content",
+      "acceptanceCriteria": [
+        "All section headers and descriptions have translation keys",
+        "Address field label has translation key",
+        "All regulatory body names and role descriptions are properly translated"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/i18n/translations.ts",
+          "operation": "modify",
+          "description": "Add new translation keys under the regulatoryBodies section: 'nationalBodies' ('National Regulatory Bodies'), 'stateCouncils' ('State Pharmacy Councils'), 'consumerForums' ('Consumer Protection Forums'), 'nationalBodiesDescription' ('Central authorities overseeing pharmacy education, practice, and drug regulation across India'), 'stateCouncilsDescription' ('State-level statutory bodies responsible for pharmacist registration and licensing'), 'consumerForumsDescription' ('Forums where consumers can file complaints related to pharmacy services, drug pricing, or unethical practices'), and 'address' ('Address'). Ensure all keys follow the existing nested structure pattern in the translations file. Add placeholder Hindi translations marked with the English text for future translation."
+        }
+      ]
+    }
+  ]
+}

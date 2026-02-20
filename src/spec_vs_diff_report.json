@@ -1,0 +1,33 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-20T18:13:51.146Z",
+  "summary": "The implementation successfully addresses all six requirements (REQ-28 through REQ-33). The backend data structure in main.mo has been updated with complete contact information for all regulatory bodies including national bodies (PCI, CDSCO, Ministry of Health), state councils (Haryana, Delhi), and consumer protection forums (NCDRC, Department of Consumer Affairs, CCPA). The frontend components RegulatoryBodies.tsx and RegulatoryBodyCard.tsx have been updated to display the bodies in three grouped sections with descriptive headers, and the card component now displays address fields with location pin icons. The i18n translations file includes all required translation keys for section headers, descriptions, field labels including 'address', and updated role descriptions.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Added migration.mo file with schema migration logic for RegulatoryBody type changes",
+      "reason": "The BuildRequest does not mention creating a migration file or implementing schema migration logic. This appears to be an implementation detail added without explicit requirement.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "description": "Added 'helpline' field to RegulatoryBody type structure",
+      "reason": "While REQ-30 mentions 'helpline' for Department of Consumer Affairs, the BuildRequest does not specify adding a general 'helpline' field to the RegulatoryBody type structure itself. The requirement specifies 'helpline' as contact information for that specific body, but the implementation added it as a schema field.",
+      "evidence": [
+        "backend/main.mo",
+        "backend/migration.mo"
+      ]
+    }
+  ],
+  "confidence": 0.92,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/RegulatoryBodyCard.tsx",
+    "frontend/src/i18n/translations.ts",
+    "project_state.json"
+  ]
+}

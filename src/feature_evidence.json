@@ -1,0 +1,47 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-regulatorybodycard-tsx-component-to-display-full-address-field-when-available-showing-it-below-the-role-description-and-above-contact-information-format-the-address-with-appropriate-spacing-and-icon-location-pin-icon",
+      "featureTitle": "Update RegulatoryBodyCard.tsx component to display full address field when available, showing it below the role description and above contact information. Format the address with appropriate spacing and icon (location pin icon).",
+      "files": [
+        "frontend/src/components/RegulatoryBodyCard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "camera@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-i18n-translations-file-to-add-translation-keys-for-all-new-content-including-section-headers-nationalbodies-statecouncils-consumerforums-section-descriptions-nationalbodiesdescription-statecouncilsdescription-consumerforumsdescription-field-label-for-address-and-updated-role-descriptions-for-all-regulatory-bodies-with-complete-text-as-provided-in-the-data",
+      "featureTitle": "Update i18n translations file to add translation keys for all new content including: section headers ('nationalBodies', 'stateCouncils', 'consumerForums'), section descriptions ('nationalBodiesDescription', 'stateCouncilsDescription', 'consumerForumsDescription'), field label for 'address', and updated role descriptions for all regulatory bodies with complete text as provided in the data.",
+      "files": [
+        "frontend/src/i18n/translations.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "camera@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-33"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
